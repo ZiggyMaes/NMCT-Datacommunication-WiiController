@@ -25,9 +25,9 @@ namespace Testtool
             init_controller();
             HIDReport report = _device.CreateReport();
             report.ReportID = 0x12;
-            report.Data[0] = (byte)0x04;
             report.Data[1] = (byte)0x30;
             _device.WriteReport(report);
+            _device.ReadReport(OnReadReport);
         }
 
         private void init_controller()
@@ -40,8 +40,10 @@ namespace Testtool
             if (this.InvokeRequired) { this.Invoke(new ReadReportCallback(OnReadReport), report); }
             else
             {
-                int dpad_value = report.Data[0]; //Left: 1 - Right: 2 - Down: 4 - Up: 8
-                switch (dpad_value)
+                int button_value1 = report.Data[0];
+                int button_value2 = report.Data[1];
+
+                switch (button_value1)
                 {
                     case 1: //Left
                         btnDirectionLeft.BackColor = Color.Red;
@@ -71,15 +73,34 @@ namespace Testtool
                         btnDirectionRight.BackColor = Color.Red;
                         btnDiretionUp.BackColor = Color.Red;
                         break;
-                    default:
-                        btnDirectionLeft.BackColor = Color.White;
-                        btnDirectionRight.BackColor = Color.White;
-                        btnDiretionUp.BackColor = Color.White;
-                        btnDirectionDown.BackColor = Color.White;
+                    case 16: // PLUS
+                        btnPlus.BackColor = Color.Red;
                         break;
+                    default:
+                        foreach (Button buttonElement in this.Controls) {  buttonElement.BackColor = Color.White; }
+                        break;                 
+                }
 
-
-                    
+                switch(button_value2)
+                {
+                    case 1:
+                        btn2.BackColor = Color.Red;
+                        break;
+                    case 2:
+                        btn1.BackColor = Color.Red;
+                        break;
+                    case 4:
+                        btnB.BackColor = Color.Red;
+                        break;
+                    case 8:
+                        btnA.BackColor = Color.Red;
+                        break;
+                    case 16:
+                        btnMinus.BackColor = Color.Red;
+                        break;
+                    case 128:
+                        btnHome.BackColor = Color.Red;
+                        break;
                 }
 
                 _device.ReadReport(OnReadReport);
@@ -88,7 +109,12 @@ namespace Testtool
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            _device.ReadReport(OnReadReport);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
