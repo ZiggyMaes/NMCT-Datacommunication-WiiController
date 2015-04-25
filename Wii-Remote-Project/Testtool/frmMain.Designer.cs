@@ -39,12 +39,14 @@
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btnB = new System.Windows.Forms.Button();
+            this.grpButtons = new System.Windows.Forms.GroupBox();
+            this.grpButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDiretionUp
             // 
             this.btnDiretionUp.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDiretionUp.Location = new System.Drawing.Point(242, 53);
+            this.btnDiretionUp.Location = new System.Drawing.Point(183, 39);
             this.btnDiretionUp.Name = "btnDiretionUp";
             this.btnDiretionUp.Size = new System.Drawing.Size(40, 90);
             this.btnDiretionUp.TabIndex = 1;
@@ -53,7 +55,7 @@
             // btnDirectionDown
             // 
             this.btnDirectionDown.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDirectionDown.Location = new System.Drawing.Point(242, 177);
+            this.btnDirectionDown.Location = new System.Drawing.Point(183, 163);
             this.btnDirectionDown.Name = "btnDirectionDown";
             this.btnDirectionDown.Size = new System.Drawing.Size(40, 90);
             this.btnDirectionDown.TabIndex = 2;
@@ -62,7 +64,7 @@
             // btnDirectionRight
             // 
             this.btnDirectionRight.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDirectionRight.Location = new System.Drawing.Point(279, 140);
+            this.btnDirectionRight.Location = new System.Drawing.Point(220, 126);
             this.btnDirectionRight.Name = "btnDirectionRight";
             this.btnDirectionRight.Size = new System.Drawing.Size(90, 40);
             this.btnDirectionRight.TabIndex = 3;
@@ -71,7 +73,7 @@
             // btnDirectionLeft
             // 
             this.btnDirectionLeft.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDirectionLeft.Location = new System.Drawing.Point(154, 140);
+            this.btnDirectionLeft.Location = new System.Drawing.Point(95, 126);
             this.btnDirectionLeft.Name = "btnDirectionLeft";
             this.btnDirectionLeft.Size = new System.Drawing.Size(90, 40);
             this.btnDirectionLeft.TabIndex = 4;
@@ -80,7 +82,7 @@
             // btnA
             // 
             this.btnA.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnA.Location = new System.Drawing.Point(198, 328);
+            this.btnA.Location = new System.Drawing.Point(139, 314);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(130, 50);
             this.btnA.TabIndex = 5;
@@ -90,7 +92,7 @@
             // btnHome
             // 
             this.btnHome.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnHome.Location = new System.Drawing.Point(224, 408);
+            this.btnHome.Location = new System.Drawing.Point(165, 394);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 25);
             this.btnHome.TabIndex = 6;
@@ -101,7 +103,7 @@
             // btnMinus
             // 
             this.btnMinus.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnMinus.Location = new System.Drawing.Point(121, 408);
+            this.btnMinus.Location = new System.Drawing.Point(62, 394);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Size = new System.Drawing.Size(75, 25);
             this.btnMinus.TabIndex = 7;
@@ -111,7 +113,7 @@
             // btnPlus
             // 
             this.btnPlus.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPlus.Location = new System.Drawing.Point(329, 408);
+            this.btnPlus.Location = new System.Drawing.Point(270, 394);
             this.btnPlus.Name = "btnPlus";
             this.btnPlus.Size = new System.Drawing.Size(75, 25);
             this.btnPlus.TabIndex = 8;
@@ -121,7 +123,7 @@
             // btn1
             // 
             this.btn1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn1.Location = new System.Drawing.Point(198, 509);
+            this.btn1.Location = new System.Drawing.Point(139, 495);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(130, 50);
             this.btn1.TabIndex = 9;
@@ -131,7 +133,7 @@
             // btn2
             // 
             this.btn2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn2.Location = new System.Drawing.Point(198, 592);
+            this.btn2.Location = new System.Drawing.Point(139, 578);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(130, 50);
             this.btn2.TabIndex = 10;
@@ -141,32 +143,42 @@
             // btnB
             // 
             this.btnB.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnB.Location = new System.Drawing.Point(198, 748);
+            this.btnB.Location = new System.Drawing.Point(139, 734);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(130, 294);
             this.btnB.TabIndex = 11;
             this.btnB.Text = "B (back)";
             this.btnB.UseVisualStyleBackColor = false;
             // 
+            // grpButtons
+            // 
+            this.grpButtons.Controls.Add(this.btnDirectionDown);
+            this.grpButtons.Controls.Add(this.btnB);
+            this.grpButtons.Controls.Add(this.btnDiretionUp);
+            this.grpButtons.Controls.Add(this.btn2);
+            this.grpButtons.Controls.Add(this.btnDirectionRight);
+            this.grpButtons.Controls.Add(this.btn1);
+            this.grpButtons.Controls.Add(this.btnDirectionLeft);
+            this.grpButtons.Controls.Add(this.btnPlus);
+            this.grpButtons.Controls.Add(this.btnA);
+            this.grpButtons.Controls.Add(this.btnMinus);
+            this.grpButtons.Controls.Add(this.btnHome);
+            this.grpButtons.Location = new System.Drawing.Point(35, 33);
+            this.grpButtons.Name = "grpButtons";
+            this.grpButtons.Size = new System.Drawing.Size(466, 1113);
+            this.grpButtons.TabIndex = 12;
+            this.grpButtons.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 1391);
-            this.Controls.Add(this.btnB);
-            this.Controls.Add(this.btn2);
-            this.Controls.Add(this.btn1);
-            this.Controls.Add(this.btnPlus);
-            this.Controls.Add(this.btnMinus);
-            this.Controls.Add(this.btnHome);
-            this.Controls.Add(this.btnA);
-            this.Controls.Add(this.btnDirectionLeft);
-            this.Controls.Add(this.btnDirectionRight);
-            this.Controls.Add(this.btnDirectionDown);
-            this.Controls.Add(this.btnDiretionUp);
+            this.ClientSize = new System.Drawing.Size(1208, 1239);
+            this.Controls.Add(this.grpButtons);
             this.Name = "frmMain";
             this.Text = "Wii Remote Testtool";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.grpButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -184,6 +196,7 @@
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btnB;
+        private System.Windows.Forms.GroupBox grpButtons;
     }
 }
 

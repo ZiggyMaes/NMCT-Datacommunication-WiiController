@@ -77,7 +77,7 @@ namespace Testtool
                         btnPlus.BackColor = Color.Red;
                         break;
                     default:
-                        foreach (Button buttonElement in this.Controls) {  buttonElement.BackColor = Color.White; }
+                        foreach (Button buttonElement in grpButtons.Controls) {  buttonElement.BackColor = Color.White; }
                         break;                 
                 }
 
