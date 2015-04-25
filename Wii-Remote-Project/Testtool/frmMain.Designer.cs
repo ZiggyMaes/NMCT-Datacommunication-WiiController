@@ -40,7 +40,19 @@
             this.btn2 = new System.Windows.Forms.Button();
             this.btnB = new System.Windows.Forms.Button();
             this.grpButtons = new System.Windows.Forms.GroupBox();
+            this.grpLeds = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.chkLed1 = new System.Windows.Forms.CheckBox();
+            this.chkLed2 = new System.Windows.Forms.CheckBox();
+            this.chkLed3 = new System.Windows.Forms.CheckBox();
+            this.chkLed4 = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chkRumble = new System.Windows.Forms.CheckBox();
             this.grpButtons.SuspendLayout();
+            this.grpLeds.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDiretionUp
@@ -98,7 +110,6 @@
             this.btnHome.TabIndex = 6;
             this.btnHome.Text = "HOME";
             this.btnHome.UseVisualStyleBackColor = false;
-            this.btnHome.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnMinus
             // 
@@ -152,8 +163,11 @@
             // 
             // grpButtons
             // 
+            this.grpButtons.Controls.Add(this.label5);
             this.grpButtons.Controls.Add(this.btnDirectionDown);
+            this.grpButtons.Controls.Add(this.chkRumble);
             this.grpButtons.Controls.Add(this.btnB);
+            this.grpButtons.Controls.Add(this.grpLeds);
             this.grpButtons.Controls.Add(this.btnDiretionUp);
             this.grpButtons.Controls.Add(this.btn2);
             this.grpButtons.Controls.Add(this.btnDirectionRight);
@@ -165,9 +179,120 @@
             this.grpButtons.Controls.Add(this.btnHome);
             this.grpButtons.Location = new System.Drawing.Point(35, 33);
             this.grpButtons.Name = "grpButtons";
-            this.grpButtons.Size = new System.Drawing.Size(466, 1113);
+            this.grpButtons.Size = new System.Drawing.Size(414, 1194);
             this.grpButtons.TabIndex = 12;
             this.grpButtons.TabStop = false;
+            // 
+            // grpLeds
+            // 
+            this.grpLeds.Controls.Add(this.label1);
+            this.grpLeds.Controls.Add(this.label2);
+            this.grpLeds.Controls.Add(this.label3);
+            this.grpLeds.Controls.Add(this.label4);
+            this.grpLeds.Controls.Add(this.chkLed1);
+            this.grpLeds.Controls.Add(this.chkLed2);
+            this.grpLeds.Controls.Add(this.chkLed3);
+            this.grpLeds.Controls.Add(this.chkLed4);
+            this.grpLeds.Location = new System.Drawing.Point(104, 1044);
+            this.grpLeds.Name = "grpLeds";
+            this.grpLeds.Size = new System.Drawing.Size(219, 87);
+            this.grpLeds.TabIndex = 13;
+            this.grpLeds.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(70, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 20);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "2";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 20);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(128, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(18, 20);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(191, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(18, 20);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "4";
+            // 
+            // chkLed1
+            // 
+            this.chkLed1.AutoSize = true;
+            this.chkLed1.Location = new System.Drawing.Point(8, 54);
+            this.chkLed1.Name = "chkLed1";
+            this.chkLed1.Size = new System.Drawing.Size(18, 17);
+            this.chkLed1.TabIndex = 12;
+            this.chkLed1.UseVisualStyleBackColor = true;
+            // 
+            // chkLed2
+            // 
+            this.chkLed2.AutoSize = true;
+            this.chkLed2.Location = new System.Drawing.Point(69, 54);
+            this.chkLed2.Name = "chkLed2";
+            this.chkLed2.Size = new System.Drawing.Size(18, 17);
+            this.chkLed2.TabIndex = 15;
+            this.chkLed2.UseVisualStyleBackColor = true;
+            // 
+            // chkLed3
+            // 
+            this.chkLed3.AutoSize = true;
+            this.chkLed3.Location = new System.Drawing.Point(130, 54);
+            this.chkLed3.Name = "chkLed3";
+            this.chkLed3.Size = new System.Drawing.Size(18, 17);
+            this.chkLed3.TabIndex = 14;
+            this.chkLed3.UseVisualStyleBackColor = true;
+            // 
+            // chkLed4
+            // 
+            this.chkLed4.AutoSize = true;
+            this.chkLed4.Location = new System.Drawing.Point(192, 54);
+            this.chkLed4.Name = "chkLed4";
+            this.chkLed4.Size = new System.Drawing.Size(18, 17);
+            this.chkLed4.TabIndex = 13;
+            this.chkLed4.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(174, 1145);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 20);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Rumble";
+            // 
+            // chkRumble
+            // 
+            this.chkRumble.AutoSize = true;
+            this.chkRumble.Location = new System.Drawing.Point(194, 1171);
+            this.chkRumble.Name = "chkRumble";
+            this.chkRumble.Size = new System.Drawing.Size(18, 17);
+            this.chkRumble.TabIndex = 13;
+            this.chkRumble.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -179,6 +304,9 @@
             this.Text = "Wii Remote Testtool";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.grpButtons.ResumeLayout(false);
+            this.grpButtons.PerformLayout();
+            this.grpLeds.ResumeLayout(false);
+            this.grpLeds.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -197,6 +325,17 @@
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btnB;
         private System.Windows.Forms.GroupBox grpButtons;
+        private System.Windows.Forms.CheckBox chkLed2;
+        private System.Windows.Forms.CheckBox chkLed3;
+        private System.Windows.Forms.CheckBox chkLed4;
+        private System.Windows.Forms.CheckBox chkLed1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkRumble;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox grpLeds;
     }
 }
 

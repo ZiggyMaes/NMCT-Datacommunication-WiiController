@@ -18,6 +18,12 @@ namespace Testtool
         public frmMain()
         {
             InitializeComponent();
+
+            chkLed1.CheckedChanged += new System.EventHandler(chkLedHandler);
+            chkLed2.CheckedChanged += new System.EventHandler(chkLedHandler);
+            chkLed3.CheckedChanged += new System.EventHandler(chkLedHandler);
+            chkLed4.CheckedChanged += new System.EventHandler(chkLedHandler);
+
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -77,7 +83,10 @@ namespace Testtool
                         btnPlus.BackColor = Color.Red;
                         break;
                     default:
-                        foreach (Button buttonElement in grpButtons.Controls) {  buttonElement.BackColor = Color.White; }
+                        foreach (Control ctrl in grpButtons.Controls) 
+                        {
+                            if(ctrl is Button) ctrl.BackColor = Color.White; 
+                        }
                         break;                 
                 }
 
@@ -107,14 +116,41 @@ namespace Testtool
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void chkLedHandler(object sender, EventArgs e)
         {
+            HIDReport report = _device.CreateReport();
+            report.ReportID = 0x11;
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            int i = 0;
+            int ledsHexSum = 0;
+            foreach (Control ctrl in grpLeds.Controls)
+            {
+                if (ctrl is CheckBox)
+                {
+                    i++;
+                    if (((CheckBox)ctrl).Checked)
+                    {
+                        switch (i)
+                        {
+                            case 1:
+                                ledsHexSum += 16;
+                                break;
+                            case 2:
+                                ledsHexSum += 32;
+                                break;
+                            case 3:
+                                ledsHexSum += 64;
+                                break;
+                            case 4:
+                                ledsHexSum += 128;
+                                break;
+                        }
+                    }
+                }
+            }
+            string hex = "0x" + ledsHexSum.ToString("X");
+            report.Data[0] = Convert.ToByte(hex, 16);
+            _device.WriteReport(report);
         }
     }
 
