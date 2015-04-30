@@ -43,7 +43,7 @@ namespace Testtool
         {
             HIDReport report = _device.CreateReport();
             report.ReportID = 0x12;
-            report.Data[1] = (byte)0x30;
+            report.Data[1] = (byte)0x37;
             _device.WriteReport(report);
             _device.ReadReport(OnReadReport);
         }
@@ -63,37 +63,37 @@ namespace Testtool
 
         private void getButtonData(HIDReport report)
         {
-                switch (report.Data[0])
+                switch (report.Data[0] & 0x1F) //0x1F -> eerste 5 bits
                 {
-                    case 1: //Left
+                    case 0x1: //Left
                         btnDirectionLeft.BackColor = Color.Red;
                         break;
-                    case 2: // Right
+                    case 0x2: // Right
                         btnDirectionRight.BackColor = Color.Red;
                         break;
-                    case 4: //Down
+                    case 0x4: //Down
                         btnDirectionDown.BackColor = Color.Red;
                         break;
-                    case 5: //left-down
+                    case 0x5: //left-down
                         btnDirectionLeft.BackColor = Color.Red;
                         btnDirectionDown.BackColor = Color.Red;
                         break;
-                    case 6: //right-down
+                    case 0x6: //right-down
                         btnDirectionRight.BackColor = Color.Red;
                         btnDirectionDown.BackColor = Color.Red;
                         break;
-                    case 8: //Up
+                    case 0x8: //Up
                         btnDiretionUp.BackColor = Color.Red;
                         break;
-                    case 9: //left-up
+                    case 0x9: //left-up
                         btnDirectionLeft.BackColor = Color.Red;
                         btnDiretionUp.BackColor = Color.Red;
                         break;
-                    case 10: //right-up
+                    case 0xA: //right-up
                         btnDirectionRight.BackColor = Color.Red;
                         btnDiretionUp.BackColor = Color.Red;
                         break;
-                    case 16: // PLUS
+                    case 0x10: // PLUS
                         btnPlus.BackColor = Color.Red;
                         break;
                     default:
@@ -101,28 +101,35 @@ namespace Testtool
                         {
                             if(ctrl is Button) ctrl.BackColor = Color.White; 
                         }
+
                         break;                 
                 }
 
-                switch(report.Data[1])
+                switch(report.Data[1] & 0x9F) //0x9F -> eerste 5 bits + laatste bit
                 {
-                    case 1: //button 2
+                    case 0x1: //button 2
                         btn2.BackColor = Color.Red;
                         break;
-                    case 2: //button 1
+                    case 0x2: //button 1
                         btn1.BackColor = Color.Red;
                         break;
-                    case 4: //button B
+                    case 0x4: //button B
                         btnB.BackColor = Color.Red;
                         break;
-                    case 8: //button A
+                    case 0x8: //button A
                         btnA.BackColor = Color.Red;
                         break;
-                    case 16: //button -
+                    case 0x10: //button -
                         btnMinus.BackColor = Color.Red;
                         break;
-                    case 128: //button home
+                    case 0x80: //button home
                         btnHome.BackColor = Color.Red;
+                        break;
+                    default:
+                        foreach (Control ctrl in grpControllerRear.Controls)
+                        {
+                            if (ctrl is Button) ctrl.BackColor = Color.White;
+                        }
                         break;
                 }
         }
