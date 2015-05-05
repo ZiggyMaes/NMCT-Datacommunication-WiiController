@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using WII.HID.Lib;
 
@@ -25,6 +26,10 @@ namespace Testtool
             chkLed3.CheckedChanged += new System.EventHandler(chkLedHandler);
             chkLed4.CheckedChanged += new System.EventHandler(chkLedHandler);
 
+            System.Timers.Timer statusUpdateTimer = new System.Timers.Timer();
+            statusUpdateTimer.Elapsed += new ElapsedEventHandler(requestStatusUpdate);
+            statusUpdateTimer.Interval = 1000;
+            statusUpdateTimer.Enabled = true;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -47,13 +52,29 @@ namespace Testtool
             _device.ReadReport(OnReadReport);
         }
 
+        private void requestStatusUpdate(object source, ElapsedEventArgs e)
+        {
+            HIDReport report = _device.CreateReport();
+            report.ReportID = 0x15;
+            _device.WriteReport(report);
+            _device.ReadReport(OnReadReport);
+        }
+
         private void OnReadReport(HIDReport report)
         {
             if (this.InvokeRequired) { this.Invoke(new ReadReportCallback(OnReadReport), report); }
             else
             {
-                getButtonData(report);
-                getAccelerometerData(report);
+                switch (report.ReportID)
+                {
+                    case 0x20:
+                        processStatus(report);
+                        break;
+                    case 0x37:
+                        getButtonData(report);
+                        getAccelerometerData(report);
+                        break;
+                }
                 _device.ReadReport(OnReadReport);
             }
         }
@@ -124,22 +145,21 @@ namespace Testtool
                 }
         }
 
-        private void requestBatteryData()
+        private void processStatus(HIDReport report)
         {
-            HIDReport report = _device.CreateReport();
-            report.ReportID = 0x11;
-            _device.WriteReport(report);
-            _device.ReadReport(processBatteryData);
-        }
-
-        private void processBatteryData(HIDReport report)
-        {
+            bool[] activeLeds = new bool[4];
             int batteryLevel = Convert.ToInt32(report.Data[5]);
-
-            pgbBattery.Value = batteryLevel;
+            byte ledStatus = report.Data[2];
             
-            init_DataRetrieval(); //reset to mode 0x37
+            for(int i=0;i<4;i++)
+            {
+                int mask = 1 << 4 + i;
+
+                if((ledStatus & mask) > 0) activeLeds[i] = true;
+                else activeLeds[i] = false;                
+            }
         }
+
         private void getAccelerometerData(HIDReport report)
         {
 
@@ -151,7 +171,7 @@ namespace Testtool
             report.ReportID = 0x11;
 
             int i = 0;
-            int ledsHexSum = 0;
+            byte ledsHexSum = 0;
             foreach (Control ctrl in grpLeds.Controls)
             {
                 if (ctrl is CheckBox)
@@ -162,29 +182,28 @@ namespace Testtool
                         switch (i)
                         {
                             case 1:
-                                ledsHexSum += 16;
+                                ledsHexSum |= 0x10;
                                 break;
                             case 2:
-                                ledsHexSum += 32;
+                                ledsHexSum |= 0x20;
                                 break;
                             case 3:
-                                ledsHexSum += 64;
+                                ledsHexSum |= 0x40;
                                 break;
                             case 4:
-                                ledsHexSum += 128;
+                                ledsHexSum |= 0x80;
                                 break;
                         }
                     }
                 }
             }
-            string hex = "0x" + ledsHexSum.ToString("X");
-            report.Data[0] = Convert.ToByte(hex, 16);
+            report.Data[0] = ledsHexSum;
             _device.WriteReport(report);
         }
 
         private void pgbBattery_Click(object sender, EventArgs e)
         {
-            requestBatteryData();
+            //getBatteryLevel(report);
         }
     }
 
