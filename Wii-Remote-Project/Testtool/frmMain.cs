@@ -55,7 +55,9 @@ namespace Testtool
 
         private void requestStatusUpdate(object source, ElapsedEventArgs e)
         {
-            createReport(0x15);
+            if (chkRumble.Checked) createReport(0x15, new byte[] { 1 });
+            else createReport(0x15);
+            
         }
 
         private void OnReadReport(HIDReport report)
@@ -235,7 +237,8 @@ namespace Testtool
 
         private void chkRumble_CheckedChanged(object sender, EventArgs e)
         {
-            
+            if(chkRumble.Checked) createReport(0x11, new byte[] { 1 });
+            else createReport(0x11, new byte[] { 0 });
         }
     }
 
