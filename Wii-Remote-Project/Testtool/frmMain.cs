@@ -68,7 +68,8 @@ namespace Testtool
                 switch (report.ReportID)
                 {
                     case 0x20:
-                        processStatus(report);
+                        updateLeds(report);
+                        pgbBattery.Value = Convert.ToInt32(report.Data[5]); // update battery
                         break;
                     case 0x37:
                         getButtonData(report);
@@ -145,19 +146,50 @@ namespace Testtool
                 }
         }
 
-        private void processStatus(HIDReport report)
+        private void updateLeds(HIDReport report)
         {
             bool[] activeLeds = new bool[4];
-
-            pgbBattery.Value = Convert.ToInt32(report.Data[5]);
-
             byte ledStatus = report.Data[2];
-
             byte mask = 1 << 4;
 
             for(int i=0;i<4;++i)
             {
-                activeLeds[i] = (mask & ledStatus) > 0;
+                if((mask & ledStatus) > 0)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            chkLed1.Checked = true;
+                            break;
+                        case 1:
+                            chkLed2.Checked = true;
+                            break;
+                        case 2:
+                            chkLed3.Checked = true;
+                            break;
+                        case 3:
+                            chkLed4.Checked = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            chkLed1.Checked = false;
+                            break;
+                        case 1:
+                            chkLed2.Checked = false;
+                            break;
+                        case 2:
+                            chkLed3.Checked = false;
+                            break;
+                        case 3:
+                            chkLed4.Checked = false;
+                            break;
+                    }
+                }
                 mask <<= 1;
             }
         }
