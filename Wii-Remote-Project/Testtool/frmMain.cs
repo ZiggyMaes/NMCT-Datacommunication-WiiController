@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using WII.HID.Lib;
 
 namespace Testtool
@@ -54,9 +53,7 @@ namespace Testtool
             else
             {
                 getButtonData(report);
-                getBatteryData(report);
                 getAccelerometerData(report);
-
                 _device.ReadReport(OnReadReport);
             }
         }
@@ -97,11 +94,7 @@ namespace Testtool
                         btnPlus.BackColor = Color.Red;
                         break;
                     default:
-                        foreach (Control ctrl in grpControllerFront.Controls) 
-                        {
-                            if(ctrl is Button) ctrl.BackColor = Color.White; 
-                        }
-
+                        foreach (Control ctrl in grpControllerFront.Controls) if(ctrl is Button) ctrl.BackColor = Color.White; 
                         break;                 
                 }
 
@@ -126,19 +119,27 @@ namespace Testtool
                         btnHome.BackColor = Color.Red;
                         break;
                     default:
-                        foreach (Control ctrl in grpControllerRear.Controls)
-                        {
-                            if (ctrl is Button) ctrl.BackColor = Color.White;
-                        }
+                        foreach (Control ctrl in grpControllerRear.Controls) if (ctrl is Button) ctrl.BackColor = Color.White;
                         break;
                 }
         }
 
-        private void getBatteryData(HIDReport report)
+        private void requestBatteryData()
         {
-
+            HIDReport report = _device.CreateReport();
+            report.ReportID = 0x11;
+            _device.WriteReport(report);
+            _device.ReadReport(processBatteryData);
         }
 
+        private void processBatteryData(HIDReport report)
+        {
+            int batteryLevel = Convert.ToInt32(report.Data[5]);
+
+            pgbBattery.Value = batteryLevel;
+            
+            init_DataRetrieval(); //reset to mode 0x37
+        }
         private void getAccelerometerData(HIDReport report)
         {
 
@@ -179,6 +180,11 @@ namespace Testtool
             string hex = "0x" + ledsHexSum.ToString("X");
             report.Data[0] = Convert.ToByte(hex, 16);
             _device.WriteReport(report);
+        }
+
+        private void pgbBattery_Click(object sender, EventArgs e)
+        {
+            requestBatteryData();
         }
     }
 
