@@ -224,6 +224,7 @@
             this.chkRumble.Size = new System.Drawing.Size(18, 17);
             this.chkRumble.TabIndex = 22;
             this.chkRumble.UseVisualStyleBackColor = true;
+            this.chkRumble.CheckedChanged += new System.EventHandler(this.chkRumble_CheckedChanged);
             // 
             // label6
             // 

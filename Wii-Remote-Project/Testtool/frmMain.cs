@@ -34,30 +34,28 @@ namespace Testtool
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            init_controller();
-            init_DataRetrieval();
-        }
-
-        private void init_controller()
-        {
             _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
+            createReport(0x12, new byte[2] { 0, 0x37 }); // start data stream via report 0x37
         }
 
-        private void init_DataRetrieval()
+        private void createReport(byte ReportID, byte[] data = null)
         {
             HIDReport report = _device.CreateReport();
-            report.ReportID = 0x12;
-            report.Data[1] = (byte)0x37;
+            report.ReportID = ReportID;
+            if(data != null)
+            {
+                for (int i = 0; i < data.Length; ++i)
+                {
+                    report.Data[i] = data[i];
+                }
+            }
             _device.WriteReport(report);
             _device.ReadReport(OnReadReport);
         }
 
         private void requestStatusUpdate(object source, ElapsedEventArgs e)
         {
-            HIDReport report = _device.CreateReport();
-            report.ReportID = 0x15;
-            _device.WriteReport(report);
-            _device.ReadReport(OnReadReport);
+            createReport(0x15);
         }
 
         private void OnReadReport(HIDReport report)
@@ -233,6 +231,11 @@ namespace Testtool
             }
             report.Data[0] = ledsHexSum;
             _device.WriteReport(report);
+        }
+
+        private void chkRumble_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 
