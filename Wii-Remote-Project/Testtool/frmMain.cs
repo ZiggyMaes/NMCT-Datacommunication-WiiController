@@ -148,15 +148,17 @@ namespace Testtool
         private void processStatus(HIDReport report)
         {
             bool[] activeLeds = new bool[4];
-            int batteryLevel = Convert.ToInt32(report.Data[5]);
-            byte ledStatus = report.Data[2];
-            
-            for(int i=0;i<4;i++)
-            {
-                int mask = 1 << 4 + i;
 
-                if((ledStatus & mask) > 0) activeLeds[i] = true;
-                else activeLeds[i] = false;                
+            pgbBattery.Value = Convert.ToInt32(report.Data[5]);
+
+            byte ledStatus = report.Data[2];
+
+            byte mask = 1 << 4;
+
+            for(int i=0;i<4;++i)
+            {
+                activeLeds[i] = (mask & ledStatus) > 0;
+                mask <<= 1;
             }
         }
 
@@ -199,11 +201,6 @@ namespace Testtool
             }
             report.Data[0] = ledsHexSum;
             _device.WriteReport(report);
-        }
-
-        private void pgbBattery_Click(object sender, EventArgs e)
-        {
-            //getBatteryLevel(report);
         }
     }
 

@@ -376,7 +376,6 @@
             this.pgbBattery.Name = "pgbBattery";
             this.pgbBattery.Size = new System.Drawing.Size(275, 122);
             this.pgbBattery.TabIndex = 12;
-            this.pgbBattery.Click += new System.EventHandler(this.pgbBattery_Click);
             // 
             // frmMain
             // 
