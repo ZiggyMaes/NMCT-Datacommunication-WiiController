@@ -16,6 +16,12 @@ namespace Testtool
     {
         HIDDevice _device; //Wii controller object
 
+        //Accelerometer rectangles
+        bool firstGraphicDrawn = false;
+        System.Drawing.SolidBrush redBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+        System.Drawing.Graphics acceleroGraphics;
+
+
         public frmMain()
         {
             InitializeComponent();
@@ -71,15 +77,15 @@ namespace Testtool
                         pgbBattery.Value = Convert.ToInt32(report.Data[5]); // update battery
                         break;
                     case 0x37:
-                        getButtonData(report);
-                        getAccelerometerData(report);
+                        processButtonData(report);
+                        processAccelerometerData(report);
                         break;
                 }
                 _device.ReadReport(OnReadReport);
             }
         }
 
-        private void getButtonData(HIDReport report)
+        private void processButtonData(HIDReport report)
         {
                 switch (report.Data[0] & 0x1F) //0x1F -> eerste 5 bits
                 {
@@ -193,9 +199,11 @@ namespace Testtool
             }
         }
 
-        private void getAccelerometerData(HIDReport report)
+        private void processAccelerometerData(HIDReport report)
         {
+            float[] acceleroData = new float[3] { report.Data[2] / (float)255.0, report.Data[3] / (float)255.0, report.Data[4] / (float)255.0 }; //X,Y,Z
 
+            drawAcceleroRectangles(acceleroData);
         }
 
         private void chkLedHandler(object sender, EventArgs e)
@@ -240,25 +248,29 @@ namespace Testtool
             else createReport(0x11, new byte[] { 0 });
         }
 
-        private void drawRectangle()
+        private void drawAcceleroRectangles(float[] acceleroData)
         {
-            System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
-            System.Drawing.Graphics formGraphics;
-            formGraphics = grpControllerRear.CreateGraphics();
-            formGraphics.FillRectangle(myBrush, new Rectangle(125, 290, 50, 150));//Y+
-            formGraphics.FillRectangle(myBrush, new Rectangle(125, 490, 50, 150));//Y-
-            formGraphics.FillRectangle(myBrush, new Rectangle(5, 440, 150, 50));//X-
-            formGraphics.FillRectangle(myBrush, new Rectangle(150, 440, 150, 50));//X+
-            formGraphics.FillRectangle(myBrush, new Rectangle(75, 650, 150, 50));//Z-
-            formGraphics.FillRectangle(myBrush, new Rectangle(75, 720, 150, 50));//Z+
+            if (firstGraphicDrawn) destroyGraphics(); //destroy all previously drawn rectangles
 
-            //myBrush.Dispose();
-            //formGraphics.Dispose();
+            redBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+            acceleroGraphics = grpControllerRear.CreateGraphics();
+
+            if (acceleroData[0] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(5, 440, (int)(acceleroData[0] * 150), 50));//X-
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(150, 440, (int)(acceleroData[0] * 150), 50));//X+*/
+
+            if (acceleroData[1] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 490, 50, (int)(acceleroData[2] * 150)));//Y-
+            else  acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 290, 50, (int)(acceleroData[1] * 150)));//Y+          
+
+            if (acceleroData[2] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(75, 650, (int)(acceleroData[2]*150), 50));//Z-
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(75, 720, (int)(acceleroData[2] * 150), 50));//Z+*/
+
+            firstGraphicDrawn = true;
         }
 
-        private void pgbBattery_Click(object sender, EventArgs e)
+        private void destroyGraphics()
         {
-            drawRectangle();
+            redBrush.Dispose();
+            acceleroGraphics.Dispose();
         }
     }
 
