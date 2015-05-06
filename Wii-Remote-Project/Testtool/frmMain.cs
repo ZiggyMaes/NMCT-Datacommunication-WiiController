@@ -18,8 +18,12 @@ namespace Testtool
 
         //Accelerometer rectangles
         bool firstGraphicDrawn = false;
-        System.Drawing.SolidBrush redBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+        System.Drawing.SolidBrush redBrush;
         System.Drawing.Graphics acceleroGraphics;
+
+        //Drawing canvas
+        private System.Drawing.Graphics g;
+        private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Blue, 2F);
 
 
         public frmMain()
@@ -80,10 +84,23 @@ namespace Testtool
                     case 0x37:
                         processButtonData(report);
                         processAccelerometerData(report);
+                        processIRData(report);
                         break;
                 }
                 _device.ReadReport(OnReadReport);
             }
+        }
+
+        private void processIRData(HIDReport report)
+        {
+            int[,] IRPositions = getIRPositions(report);
+
+            if((report.Data[1] & 0x9F) == 0x4)
+            {
+                g = pcbDrawCanvas.CreateGraphics();
+                g.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(IRPositions[0, 0], IRPositions[0, 1], 10, 10));
+            }
+
         }
 
         private void processButtonData(HIDReport report)
@@ -253,11 +270,18 @@ namespace Testtool
         {
             if (firstGraphicDrawn) destroyGraphics(); //destroy all previously drawn rectangles
 
-            redBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+            Color[] randomColor = new System.Drawing.Color[2] {Color.Red, Color.Green};
+            int random;
+            Random rnd = new Random();
+            random = rnd.Next(0,2);
+
+
+            redBrush = new System.Drawing.SolidBrush(randomColor[random]);
             acceleroGraphics = grpControllerRear.CreateGraphics();
 
+            
             if (acceleroData[0] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(5, 440, (int)(acceleroData[0] * 150), 50));//X-
-            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(150, 440, (int)(acceleroData[0] * 150), 50));//X+*/
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(150, 440, (int)(acceleroData[0] * 150), 50));//X+
 
             if (acceleroData[1] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 490, 50, (int)(acceleroData[2] * 150)));//Y-
             else  acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 290, 50, (int)(acceleroData[1] * 150)));//Y+          
@@ -272,6 +296,7 @@ namespace Testtool
         {
             redBrush.Dispose();
             acceleroGraphics.Dispose();
+         
         }
 
         private void enableIRCamera()
@@ -302,7 +327,7 @@ namespace Testtool
                     int count = (leftOver > 16 ? 16 : leftOver);
                     int tempAddress = address + index;
                     HIDReport report = _device.CreateReport();
-                    report.ReportID = 0x16; 
+                    report.ReportID = 0x16;
                     report.Data[0] = (byte)((tempAddress & 0x4000000) >> 0x18); 
                     report.Data[1] = (byte)((tempAddress & 0xff0000) >> 0x10); 
                     report.Data[2] = (byte)((tempAddress & 0xff00) >> 0x8); 
@@ -313,6 +338,24 @@ namespace Testtool
                     index += 16;
                 }
             }
+        }
+
+        private int[,] getIRPositions(HIDReport report)
+        {
+            //5 - 9 / 10- 14
+            int x1 = report.Data[5] | (report.Data[7] & 3 << 4) << 4;
+            int x2 = report.Data[8] | (report.Data[7] & 3) << 8;
+            int x3 = report.Data[10] | (report.Data[12] & 3 << 4) << 4;
+            int x4 = report.Data[13] | (report.Data[12] & 3) << 8;
+
+            int y1 = report.Data[6] | (report.Data[7] & 3 << 6) << 2;
+            int y2 = report.Data[9] | (report.Data[7] & 3 << 2) << 6;
+            int y3 = report.Data[11] | (report.Data[12] & 3 << 6) << 2;
+            int y4 = report.Data[14] | (report.Data[12] & 3 << 2) << 6;
+
+            Console.Write("X1: " + x1 + " || Y1: " + y1 + "\n");
+
+            return new int[4,2] {{x1,y1}, {x2,y2},{x3,y3},{x4,y4}};
         }
 
     }

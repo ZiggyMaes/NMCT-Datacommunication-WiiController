@@ -55,17 +55,19 @@
             this.chkLed3 = new System.Windows.Forms.CheckBox();
             this.chkLed4 = new System.Windows.Forms.CheckBox();
             this.grpControllerRear = new System.Windows.Forms.GroupBox();
+            this.lblAccelXMinus = new System.Windows.Forms.Label();
+            this.lblAccelYMinus = new System.Windows.Forms.Label();
+            this.lblAccelXPlus = new System.Windows.Forms.Label();
+            this.lblAccelYPlus = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pgbBattery = new System.Windows.Forms.ProgressBar();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.lblAccelYPlus = new System.Windows.Forms.Label();
-            this.lblAccelXPlus = new System.Windows.Forms.Label();
-            this.lblAccelYMinus = new System.Windows.Forms.Label();
-            this.lblAccelXMinus = new System.Windows.Forms.Label();
+            this.pcbDrawCanvas = new System.Windows.Forms.PictureBox();
             this.grpControllerFront.SuspendLayout();
             this.grpLeds.SuspendLayout();
             this.grpControllerRear.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbDrawCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDiretionUp
@@ -202,7 +204,7 @@
             this.grpControllerFront.Controls.Add(this.btnA);
             this.grpControllerFront.Controls.Add(this.btnMinus);
             this.grpControllerFront.Controls.Add(this.btnHome);
-            this.grpControllerFront.Location = new System.Drawing.Point(35, 33);
+            this.grpControllerFront.Location = new System.Drawing.Point(35, 35);
             this.grpControllerFront.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpControllerFront.Name = "grpControllerFront";
             this.grpControllerFront.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -360,7 +362,7 @@
             this.grpControllerRear.Controls.Add(this.label8);
             this.grpControllerRear.Controls.Add(this.pgbBattery);
             this.grpControllerRear.Controls.Add(this.btnB);
-            this.grpControllerRear.Location = new System.Drawing.Point(517, 33);
+            this.grpControllerRear.Location = new System.Drawing.Point(486, 35);
             this.grpControllerRear.Margin = new System.Windows.Forms.Padding(4);
             this.grpControllerRear.Name = "grpControllerRear";
             this.grpControllerRear.Padding = new System.Windows.Forms.Padding(4);
@@ -368,6 +370,38 @@
             this.grpControllerRear.TabIndex = 13;
             this.grpControllerRear.TabStop = false;
             this.grpControllerRear.Text = "Rear";
+            // 
+            // lblAccelXMinus
+            // 
+            this.lblAccelXMinus.AutoSize = true;
+            this.lblAccelXMinus.Location = new System.Drawing.Point(61, 564);
+            this.lblAccelXMinus.Name = "lblAccelXMinus";
+            this.lblAccelXMinus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelXMinus.TabIndex = 17;
+            // 
+            // lblAccelYMinus
+            // 
+            this.lblAccelYMinus.AutoSize = true;
+            this.lblAccelYMinus.Location = new System.Drawing.Point(172, 697);
+            this.lblAccelYMinus.Name = "lblAccelYMinus";
+            this.lblAccelYMinus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelYMinus.TabIndex = 16;
+            // 
+            // lblAccelXPlus
+            // 
+            this.lblAccelXPlus.AutoSize = true;
+            this.lblAccelXPlus.Location = new System.Drawing.Point(294, 564);
+            this.lblAccelXPlus.Name = "lblAccelXPlus";
+            this.lblAccelXPlus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelXPlus.TabIndex = 15;
+            // 
+            // lblAccelYPlus
+            // 
+            this.lblAccelYPlus.AutoSize = true;
+            this.lblAccelYPlus.Location = new System.Drawing.Point(172, 441);
+            this.lblAccelYPlus.Name = "lblAccelYPlus";
+            this.lblAccelYPlus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelYPlus.TabIndex = 14;
             // 
             // label8
             // 
@@ -389,43 +423,21 @@
             this.pgbBattery.Size = new System.Drawing.Size(275, 122);
             this.pgbBattery.TabIndex = 12;
             // 
-            // lblAccelYPlus
+            // pcbDrawCanvas
             // 
-            this.lblAccelYPlus.AutoSize = true;
-            this.lblAccelYPlus.Location = new System.Drawing.Point(172, 441);
-            this.lblAccelYPlus.Name = "lblAccelYPlus";
-            this.lblAccelYPlus.Size = new System.Drawing.Size(0, 17);
-            this.lblAccelYPlus.TabIndex = 14;
-            // 
-            // lblAccelXPlus
-            // 
-            this.lblAccelXPlus.AutoSize = true;
-            this.lblAccelXPlus.Location = new System.Drawing.Point(294, 564);
-            this.lblAccelXPlus.Name = "lblAccelXPlus";
-            this.lblAccelXPlus.Size = new System.Drawing.Size(0, 17);
-            this.lblAccelXPlus.TabIndex = 15;
-            // 
-            // lblAccelYMinus
-            // 
-            this.lblAccelYMinus.AutoSize = true;
-            this.lblAccelYMinus.Location = new System.Drawing.Point(172, 697);
-            this.lblAccelYMinus.Name = "lblAccelYMinus";
-            this.lblAccelYMinus.Size = new System.Drawing.Size(0, 17);
-            this.lblAccelYMinus.TabIndex = 16;
-            // 
-            // lblAccelXMinus
-            // 
-            this.lblAccelXMinus.AutoSize = true;
-            this.lblAccelXMinus.Location = new System.Drawing.Point(61, 564);
-            this.lblAccelXMinus.Name = "lblAccelXMinus";
-            this.lblAccelXMinus.Size = new System.Drawing.Size(0, 17);
-            this.lblAccelXMinus.TabIndex = 17;
+            this.pcbDrawCanvas.BackColor = System.Drawing.Color.Green;
+            this.pcbDrawCanvas.Location = new System.Drawing.Point(928, 222);
+            this.pcbDrawCanvas.Name = "pcbDrawCanvas";
+            this.pcbDrawCanvas.Size = new System.Drawing.Size(1023, 767);
+            this.pcbDrawCanvas.TabIndex = 14;
+            this.pcbDrawCanvas.TabStop = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 1173);
+            this.ClientSize = new System.Drawing.Size(1981, 1173);
+            this.Controls.Add(this.pcbDrawCanvas);
             this.Controls.Add(this.grpControllerRear);
             this.Controls.Add(this.grpControllerFront);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -441,6 +453,7 @@
             this.grpControllerRear.ResumeLayout(false);
             this.grpControllerRear.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbDrawCanvas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -480,6 +493,7 @@
         private System.Windows.Forms.Label lblAccelXPlus;
         private System.Windows.Forms.Label lblAccelYPlus;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.PictureBox pcbDrawCanvas;
     }
 }
 
