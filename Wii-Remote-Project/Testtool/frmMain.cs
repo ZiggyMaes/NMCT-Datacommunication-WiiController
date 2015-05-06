@@ -41,6 +41,7 @@ namespace Testtool
         private void frmMain_Load(object sender, EventArgs e)
         {
             _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
+            enableIRCamera();
             createReport(0x12, new byte[2] { 0, 0x37 }); // start data stream via report 0x37
         }
 
@@ -272,6 +273,48 @@ namespace Testtool
             redBrush.Dispose();
             acceleroGraphics.Dispose();
         }
+
+        private void enableIRCamera()
+        {
+            createReport(0x13, new byte[1] { 0x04 });
+            createReport(0x1a, new byte[1] { 0x04 });
+            writeDataToRegister(0xB00030, new byte[1] { 0x08 });
+
+            //Gevoeligheid Wii level 3
+            writeDataToRegister(0xB00000, new byte[9] { 0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0xaa, 0x00, 0x64 });
+            writeDataToRegister(0xb0001a, new byte[2] { 0x63, 0x03 });
+
+            writeDataToRegister(0xB00033, new byte[1] { 0x1 });
+            writeDataToRegister(0xB00030, new byte[1] { 0x8 });
+
+        }
+        private void writeDataToRegister(int address, byte[] data)
+        {
+            if ((_device != null))
+            {
+                int index = 0;
+                while (index < data.Length)
+                { 
+                    // Bepaal hoeveel bytes er nog moeten verzonden worden
+                    int leftOver = data.Length - index;
+
+                    // We kunnen maximaal 16 bytes per keer verzenden dus moeten we het aantal te verzenden bytes daarop limiteren
+                    int count = (leftOver > 16 ? 16 : leftOver);
+                    int tempAddress = address + index;
+                    HIDReport report = _device.CreateReport();
+                    report.ReportID = 0x16; 
+                    report.Data[0] = (byte)((tempAddress & 0x4000000) >> 0x18); 
+                    report.Data[1] = (byte)((tempAddress & 0xff0000) >> 0x10); 
+                    report.Data[2] = (byte)((tempAddress & 0xff00) >> 0x8); 
+                    report.Data[3] = (byte)((tempAddress & 0xff)); 
+                    report.Data[4] = (byte)count;
+                    Buffer.BlockCopy(data, index, report.Data, 5, count); 
+                    _device.WriteReport(report); 
+                    index += 16;
+                }
+            }
+        }
+
     }
 
 }
