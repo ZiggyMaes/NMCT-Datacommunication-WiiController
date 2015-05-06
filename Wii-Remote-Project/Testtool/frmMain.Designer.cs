@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnDiretionUp = new System.Windows.Forms.Button();
             this.btnDirectionDown = new System.Windows.Forms.Button();
             this.btnDirectionRight = new System.Windows.Forms.Button();
@@ -56,9 +57,15 @@
             this.grpControllerRear = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.pgbBattery = new System.Windows.Forms.ProgressBar();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.lblAccelYPlus = new System.Windows.Forms.Label();
+            this.lblAccelXPlus = new System.Windows.Forms.Label();
+            this.lblAccelYMinus = new System.Windows.Forms.Label();
+            this.lblAccelXMinus = new System.Windows.Forms.Label();
             this.grpControllerFront.SuspendLayout();
             this.grpLeds.SuspendLayout();
             this.grpControllerRear.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDiretionUp
@@ -199,7 +206,7 @@
             this.grpControllerFront.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpControllerFront.Name = "grpControllerFront";
             this.grpControllerFront.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpControllerFront.Size = new System.Drawing.Size(400, 985);
+            this.grpControllerFront.Size = new System.Drawing.Size(410, 1129);
             this.grpControllerFront.TabIndex = 12;
             this.grpControllerFront.TabStop = false;
             this.grpControllerFront.Text = "Front";
@@ -208,7 +215,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.label7.Location = new System.Drawing.Point(169, 826);
+            this.label7.Location = new System.Drawing.Point(166, 980);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 20);
@@ -218,7 +225,7 @@
             // chkRumble
             // 
             this.chkRumble.AutoSize = true;
-            this.chkRumble.Location = new System.Drawing.Point(195, 854);
+            this.chkRumble.Location = new System.Drawing.Point(192, 1008);
             this.chkRumble.Margin = new System.Windows.Forms.Padding(4);
             this.chkRumble.Name = "chkRumble";
             this.chkRumble.Size = new System.Drawing.Size(18, 17);
@@ -256,7 +263,7 @@
             this.grpLeds.Controls.Add(this.chkLed2);
             this.grpLeds.Controls.Add(this.chkLed3);
             this.grpLeds.Controls.Add(this.chkLed4);
-            this.grpLeds.Location = new System.Drawing.Point(95, 878);
+            this.grpLeds.Location = new System.Drawing.Point(92, 1032);
             this.grpLeds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpLeds.Name = "grpLeds";
             this.grpLeds.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -346,6 +353,10 @@
             // 
             // grpControllerRear
             // 
+            this.grpControllerRear.Controls.Add(this.lblAccelXMinus);
+            this.grpControllerRear.Controls.Add(this.lblAccelYMinus);
+            this.grpControllerRear.Controls.Add(this.lblAccelXPlus);
+            this.grpControllerRear.Controls.Add(this.lblAccelYPlus);
             this.grpControllerRear.Controls.Add(this.label8);
             this.grpControllerRear.Controls.Add(this.pgbBattery);
             this.grpControllerRear.Controls.Add(this.btnB);
@@ -353,7 +364,7 @@
             this.grpControllerRear.Margin = new System.Windows.Forms.Padding(4);
             this.grpControllerRear.Name = "grpControllerRear";
             this.grpControllerRear.Padding = new System.Windows.Forms.Padding(4);
-            this.grpControllerRear.Size = new System.Drawing.Size(400, 985);
+            this.grpControllerRear.Size = new System.Drawing.Size(410, 1129);
             this.grpControllerRear.TabIndex = 13;
             this.grpControllerRear.TabStop = false;
             this.grpControllerRear.Text = "Rear";
@@ -362,7 +373,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.label8.Location = new System.Drawing.Point(160, 663);
+            this.label8.Location = new System.Drawing.Point(171, 960);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 20);
@@ -371,12 +382,45 @@
             // 
             // pgbBattery
             // 
-            this.pgbBattery.Location = new System.Drawing.Point(61, 700);
+            this.pgbBattery.Location = new System.Drawing.Point(72, 997);
             this.pgbBattery.Margin = new System.Windows.Forms.Padding(4);
             this.pgbBattery.Maximum = 255;
             this.pgbBattery.Name = "pgbBattery";
             this.pgbBattery.Size = new System.Drawing.Size(275, 122);
             this.pgbBattery.TabIndex = 12;
+            this.pgbBattery.Click += new System.EventHandler(this.pgbBattery_Click);
+            // 
+            // lblAccelYPlus
+            // 
+            this.lblAccelYPlus.AutoSize = true;
+            this.lblAccelYPlus.Location = new System.Drawing.Point(172, 441);
+            this.lblAccelYPlus.Name = "lblAccelYPlus";
+            this.lblAccelYPlus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelYPlus.TabIndex = 14;
+            // 
+            // lblAccelXPlus
+            // 
+            this.lblAccelXPlus.AutoSize = true;
+            this.lblAccelXPlus.Location = new System.Drawing.Point(294, 564);
+            this.lblAccelXPlus.Name = "lblAccelXPlus";
+            this.lblAccelXPlus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelXPlus.TabIndex = 15;
+            // 
+            // lblAccelYMinus
+            // 
+            this.lblAccelYMinus.AutoSize = true;
+            this.lblAccelYMinus.Location = new System.Drawing.Point(172, 697);
+            this.lblAccelYMinus.Name = "lblAccelYMinus";
+            this.lblAccelYMinus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelYMinus.TabIndex = 16;
+            // 
+            // lblAccelXMinus
+            // 
+            this.lblAccelXMinus.AutoSize = true;
+            this.lblAccelXMinus.Location = new System.Drawing.Point(61, 564);
+            this.lblAccelXMinus.Name = "lblAccelXMinus";
+            this.lblAccelXMinus.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelXMinus.TabIndex = 17;
             // 
             // frmMain
             // 
@@ -397,6 +441,7 @@
             this.grpLeds.PerformLayout();
             this.grpControllerRear.ResumeLayout(false);
             this.grpControllerRear.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -431,6 +476,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblAccelXMinus;
+        private System.Windows.Forms.Label lblAccelYMinus;
+        private System.Windows.Forms.Label lblAccelXPlus;
+        private System.Windows.Forms.Label lblAccelYPlus;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

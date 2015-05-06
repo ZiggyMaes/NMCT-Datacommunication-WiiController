@@ -56,8 +56,7 @@ namespace Testtool
         private void requestStatusUpdate(object source, ElapsedEventArgs e)
         {
             if (chkRumble.Checked) createReport(0x15, new byte[] { 1 });
-            else createReport(0x15);
-            
+            else createReport(0x15);          
         }
 
         private void OnReadReport(HIDReport report)
@@ -239,6 +238,27 @@ namespace Testtool
         {
             if(chkRumble.Checked) createReport(0x11, new byte[] { 1 });
             else createReport(0x11, new byte[] { 0 });
+        }
+
+        private void drawRectangle()
+        {
+            System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+            System.Drawing.Graphics formGraphics;
+            formGraphics = grpControllerRear.CreateGraphics();
+            formGraphics.FillRectangle(myBrush, new Rectangle(125, 290, 50, 150));//Y+
+            formGraphics.FillRectangle(myBrush, new Rectangle(125, 490, 50, 150));//Y-
+            formGraphics.FillRectangle(myBrush, new Rectangle(5, 440, 150, 50));//X-
+            formGraphics.FillRectangle(myBrush, new Rectangle(150, 440, 150, 50));//X+
+            formGraphics.FillRectangle(myBrush, new Rectangle(75, 650, 150, 50));//Z-
+            formGraphics.FillRectangle(myBrush, new Rectangle(75, 720, 150, 50));//Z+
+
+            //myBrush.Dispose();
+            //formGraphics.Dispose();
+        }
+
+        private void pgbBattery_Click(object sender, EventArgs e)
+        {
+            drawRectangle();
         }
     }
 
