@@ -98,7 +98,7 @@ namespace Testtool
             if((report.Data[1] & 0x9F) == 0x4)
             {
                 g = pcbDrawCanvas.CreateGraphics();
-                g.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(IRPositions[0, 0], IRPositions[0, 1], 10, 10));
+                g.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(1023-IRPositions[0, 0], IRPositions[0, 1], 10, 10));
             }
 
         }
