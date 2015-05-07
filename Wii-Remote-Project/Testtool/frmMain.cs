@@ -22,7 +22,6 @@ namespace Testtool
 
         //Drawing canvas
         private System.Drawing.Graphics graphics;
-        private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Blue, 2F);
 
         int[] drawnPointsX = new int[0];
         int[] drawnPointsY = new int[0];
@@ -31,6 +30,8 @@ namespace Testtool
         public frmMain()
         {
             InitializeComponent();
+
+            _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
 
             //LED event handlers
             chkLed1.CheckedChanged += new System.EventHandler(chkLedHandler);
@@ -46,7 +47,7 @@ namespace Testtool
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
+            
             enableIRCamera();
             createReport(0x12, new byte[2] { 0, 0x37 }); // start data stream via report 0x37
         }
