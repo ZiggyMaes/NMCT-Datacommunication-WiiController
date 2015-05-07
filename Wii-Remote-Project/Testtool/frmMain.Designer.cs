@@ -425,7 +425,6 @@
             // 
             // pcbDrawCanvas
             // 
-            this.pcbDrawCanvas.BackColor = System.Drawing.Color.Green;
             this.pcbDrawCanvas.Location = new System.Drawing.Point(928, 222);
             this.pcbDrawCanvas.Name = "pcbDrawCanvas";
             this.pcbDrawCanvas.Size = new System.Drawing.Size(1023, 767);

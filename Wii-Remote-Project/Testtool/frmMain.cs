@@ -22,8 +22,11 @@ namespace Testtool
         System.Drawing.Graphics acceleroGraphics;
 
         //Drawing canvas
-        private System.Drawing.Graphics g;
+        private System.Drawing.Graphics graphics;
         private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Blue, 2F);
+
+        int[] drawnPointsX = new int[0];
+        int[] drawnPointsY = new int[0];
 
 
         public frmMain()
@@ -94,11 +97,26 @@ namespace Testtool
         private void processIRData(HIDReport report)
         {
             int[,] IRPositions = getIRPositions(report);
+            graphics = pcbDrawCanvas.CreateGraphics();
 
             if((report.Data[1] & 0x9F) == 0x4)
             {
-                g = pcbDrawCanvas.CreateGraphics();
-                g.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(1023-IRPositions[0, 0], IRPositions[0, 1], 10, 10));
+                graphics.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(1023-IRPositions[0, 0], IRPositions[0, 1], 10, 10));
+                /*Array.Resize(ref drawnPointsX, drawnPointsX.Length + 1);
+                Array.Resize(ref drawnPointsY, drawnPointsY.Length + 1);
+                drawnPointsX[drawnPointsX.GetUpperBound(0)] = 1023 - IRPositions[0, 0];
+                drawnPointsY[drawnPointsY.GetUpperBound(0)] = IRPositions[0, 1];*/
+
+            }
+            else
+            {
+                graphics.Clear(pcbDrawCanvas.BackColor); 
+                graphics.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(1023 - IRPositions[0, 0], IRPositions[0, 1], 10, 10));
+
+                /*for(int i=0;i<drawnPointsX.Length;++i)
+                {
+                    graphics.FillRectangle(new System.Drawing.SolidBrush(Color.Red), new Rectangle(drawnPointsX[i], drawnPointsY[i], 10, 10));
+                }*/
             }
 
         }
