@@ -43,7 +43,6 @@
             this.grpControllerFront = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkRumble = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.grpLeds = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +62,28 @@
             this.pgbBattery = new System.Windows.Forms.ProgressBar();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.pcbDrawCanvas = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblIR3PosX = new System.Windows.Forms.Label();
+            this.lblIR4PosX = new System.Windows.Forms.Label();
+            this.lblIR2PosX = new System.Windows.Forms.Label();
+            this.lblIR1PosX = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblIR3PosY = new System.Windows.Forms.Label();
+            this.lblIR4PosY = new System.Windows.Forms.Label();
+            this.lblIR2PosY = new System.Windows.Forms.Label();
+            this.lblIR1PosY = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblAccelerationX = new System.Windows.Forms.Label();
+            this.lblAccelerationY = new System.Windows.Forms.Label();
+            this.lblAccelerationZ = new System.Windows.Forms.Label();
             this.grpControllerFront.SuspendLayout();
             this.grpLeds.SuspendLayout();
             this.grpControllerRear.SuspendLayout();
@@ -191,10 +212,11 @@
             // 
             this.grpControllerFront.Controls.Add(this.label7);
             this.grpControllerFront.Controls.Add(this.chkRumble);
-            this.grpControllerFront.Controls.Add(this.label6);
             this.grpControllerFront.Controls.Add(this.label5);
             this.grpControllerFront.Controls.Add(this.btnDirectionDown);
+            this.grpControllerFront.Controls.Add(this.label8);
             this.grpControllerFront.Controls.Add(this.grpLeds);
+            this.grpControllerFront.Controls.Add(this.pgbBattery);
             this.grpControllerFront.Controls.Add(this.btnDiretionUp);
             this.grpControllerFront.Controls.Add(this.btn2);
             this.grpControllerFront.Controls.Add(this.btnDirectionRight);
@@ -234,16 +256,6 @@
             this.chkRumble.TabIndex = 22;
             this.chkRumble.UseVisualStyleBackColor = true;
             this.chkRumble.CheckedChanged += new System.EventHandler(this.chkRumble_CheckedChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(136, 687);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 17);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "FIGURE SPEAKER";
             // 
             // label5
             // 
@@ -355,13 +367,17 @@
             // 
             // grpControllerRear
             // 
+            this.grpControllerRear.Controls.Add(this.lblAccelerationZ);
             this.grpControllerRear.Controls.Add(this.lblAccelXMinus);
+            this.grpControllerRear.Controls.Add(this.lblAccelerationY);
             this.grpControllerRear.Controls.Add(this.lblAccelYMinus);
+            this.grpControllerRear.Controls.Add(this.lblAccelerationX);
             this.grpControllerRear.Controls.Add(this.lblAccelXPlus);
+            this.grpControllerRear.Controls.Add(this.label15);
             this.grpControllerRear.Controls.Add(this.lblAccelYPlus);
-            this.grpControllerRear.Controls.Add(this.label8);
-            this.grpControllerRear.Controls.Add(this.pgbBattery);
+            this.grpControllerRear.Controls.Add(this.label14);
             this.grpControllerRear.Controls.Add(this.btnB);
+            this.grpControllerRear.Controls.Add(this.label13);
             this.grpControllerRear.Location = new System.Drawing.Point(486, 35);
             this.grpControllerRear.Margin = new System.Windows.Forms.Padding(4);
             this.grpControllerRear.Name = "grpControllerRear";
@@ -407,7 +423,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.label8.Location = new System.Drawing.Point(171, 960);
+            this.label8.Location = new System.Drawing.Point(175, 724);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 20);
@@ -416,7 +432,7 @@
             // 
             // pgbBattery
             // 
-            this.pgbBattery.Location = new System.Drawing.Point(72, 997);
+            this.pgbBattery.Location = new System.Drawing.Point(76, 761);
             this.pgbBattery.Margin = new System.Windows.Forms.Padding(4);
             this.pgbBattery.Maximum = 255;
             this.pgbBattery.Name = "pgbBattery";
@@ -431,11 +447,215 @@
             this.pcbDrawCanvas.TabIndex = 14;
             this.pcbDrawCanvas.TabStop = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1355, 49);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 17);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "IR 1 Pos X:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1355, 89);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(78, 17);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "IR 2 Pos X:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(1355, 169);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(78, 17);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "IR 4 Pos X:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(1355, 129);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(78, 17);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "IR 3 Pos X:";
+            // 
+            // lblIR3PosX
+            // 
+            this.lblIR3PosX.AutoSize = true;
+            this.lblIR3PosX.Location = new System.Drawing.Point(1449, 129);
+            this.lblIR3PosX.Name = "lblIR3PosX";
+            this.lblIR3PosX.Size = new System.Drawing.Size(0, 17);
+            this.lblIR3PosX.TabIndex = 22;
+            // 
+            // lblIR4PosX
+            // 
+            this.lblIR4PosX.AutoSize = true;
+            this.lblIR4PosX.Location = new System.Drawing.Point(1449, 169);
+            this.lblIR4PosX.Name = "lblIR4PosX";
+            this.lblIR4PosX.Size = new System.Drawing.Size(0, 17);
+            this.lblIR4PosX.TabIndex = 21;
+            // 
+            // lblIR2PosX
+            // 
+            this.lblIR2PosX.AutoSize = true;
+            this.lblIR2PosX.Location = new System.Drawing.Point(1449, 89);
+            this.lblIR2PosX.Name = "lblIR2PosX";
+            this.lblIR2PosX.Size = new System.Drawing.Size(0, 17);
+            this.lblIR2PosX.TabIndex = 20;
+            // 
+            // lblIR1PosX
+            // 
+            this.lblIR1PosX.AutoSize = true;
+            this.lblIR1PosX.Location = new System.Drawing.Point(1449, 49);
+            this.lblIR1PosX.Name = "lblIR1PosX";
+            this.lblIR1PosX.Size = new System.Drawing.Size(0, 17);
+            this.lblIR1PosX.TabIndex = 19;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(1652, 129);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 17);
+            this.label17.TabIndex = 26;
+            this.label17.Text = "IR 3 Pos Y:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(1652, 169);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(78, 17);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "IR 4 Pos Y:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(1652, 89);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(78, 17);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "IR 2 Pos Y:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(1652, 49);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(78, 17);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "IR 1 Pos Y:";
+            // 
+            // lblIR3PosY
+            // 
+            this.lblIR3PosY.AutoSize = true;
+            this.lblIR3PosY.Location = new System.Drawing.Point(1757, 129);
+            this.lblIR3PosY.Name = "lblIR3PosY";
+            this.lblIR3PosY.Size = new System.Drawing.Size(0, 17);
+            this.lblIR3PosY.TabIndex = 30;
+            // 
+            // lblIR4PosY
+            // 
+            this.lblIR4PosY.AutoSize = true;
+            this.lblIR4PosY.Location = new System.Drawing.Point(1757, 169);
+            this.lblIR4PosY.Name = "lblIR4PosY";
+            this.lblIR4PosY.Size = new System.Drawing.Size(0, 17);
+            this.lblIR4PosY.TabIndex = 29;
+            // 
+            // lblIR2PosY
+            // 
+            this.lblIR2PosY.AutoSize = true;
+            this.lblIR2PosY.Location = new System.Drawing.Point(1757, 89);
+            this.lblIR2PosY.Name = "lblIR2PosY";
+            this.lblIR2PosY.Size = new System.Drawing.Size(0, 17);
+            this.lblIR2PosY.TabIndex = 28;
+            // 
+            // lblIR1PosY
+            // 
+            this.lblIR1PosY.AutoSize = true;
+            this.lblIR1PosY.Location = new System.Drawing.Point(1757, 49);
+            this.lblIR1PosY.Name = "lblIR1PosY";
+            this.lblIR1PosY.Size = new System.Drawing.Size(0, 17);
+            this.lblIR1PosY.TabIndex = 27;
+            this.lblIR1PosY.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(24, 1008);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 17);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Acceleration X-axis:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(24, 1048);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(132, 17);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "Acceleration Y-axis:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(24, 1088);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(132, 17);
+            this.label15.TabIndex = 33;
+            this.label15.Text = "Acceleration Z-axis:";
+            // 
+            // lblAccelerationX
+            // 
+            this.lblAccelerationX.AutoSize = true;
+            this.lblAccelerationX.Location = new System.Drawing.Point(162, 1008);
+            this.lblAccelerationX.Name = "lblAccelerationX";
+            this.lblAccelerationX.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelerationX.TabIndex = 34;
+            // 
+            // lblAccelerationY
+            // 
+            this.lblAccelerationY.AutoSize = true;
+            this.lblAccelerationY.Location = new System.Drawing.Point(162, 1048);
+            this.lblAccelerationY.Name = "lblAccelerationY";
+            this.lblAccelerationY.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelerationY.TabIndex = 35;
+            // 
+            // lblAccelerationZ
+            // 
+            this.lblAccelerationZ.AutoSize = true;
+            this.lblAccelerationZ.Location = new System.Drawing.Point(162, 1088);
+            this.lblAccelerationZ.Name = "lblAccelerationZ";
+            this.lblAccelerationZ.Size = new System.Drawing.Size(0, 17);
+            this.lblAccelerationZ.TabIndex = 36;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1981, 1173);
+            this.Controls.Add(this.lblIR3PosY);
+            this.Controls.Add(this.lblIR4PosY);
+            this.Controls.Add(this.lblIR2PosY);
+            this.Controls.Add(this.lblIR1PosY);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.lblIR3PosX);
+            this.Controls.Add(this.lblIR4PosX);
+            this.Controls.Add(this.lblIR2PosX);
+            this.Controls.Add(this.lblIR1PosX);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.pcbDrawCanvas);
             this.Controls.Add(this.grpControllerRear);
             this.Controls.Add(this.grpControllerFront);
@@ -454,6 +674,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbDrawCanvas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -484,7 +705,6 @@
         private System.Windows.Forms.GroupBox grpControllerRear;
         private System.Windows.Forms.ProgressBar pgbBattery;
         private System.Windows.Forms.CheckBox chkRumble;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblAccelXMinus;
@@ -493,6 +713,28 @@
         private System.Windows.Forms.Label lblAccelYPlus;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.PictureBox pcbDrawCanvas;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblIR3PosX;
+        private System.Windows.Forms.Label lblIR4PosX;
+        private System.Windows.Forms.Label lblIR2PosX;
+        private System.Windows.Forms.Label lblIR1PosX;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblIR3PosY;
+        private System.Windows.Forms.Label lblIR4PosY;
+        private System.Windows.Forms.Label lblIR2PosY;
+        private System.Windows.Forms.Label lblIR1PosY;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblAccelerationX;
+        private System.Windows.Forms.Label lblAccelerationY;
+        private System.Windows.Forms.Label lblAccelerationZ;
     }
 }
 

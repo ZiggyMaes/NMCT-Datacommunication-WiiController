@@ -17,7 +17,6 @@ namespace Testtool
         HIDDevice _device; //Wii controller object
 
         //Accelerometer rectangles
-        bool firstGraphicDrawn = false;
         System.Drawing.SolidBrush redBrush;
         System.Drawing.Graphics acceleroGraphics;
 
@@ -98,6 +97,16 @@ namespace Testtool
         {
             int[,] IRPositions = getIRPositions(report);
             graphics = pcbDrawCanvas.CreateGraphics();
+
+            lblIR1PosX.Text = IRPositions[0,0].ToString();
+            lblIR2PosX.Text = IRPositions[1,0].ToString();
+            lblIR3PosX.Text = IRPositions[2,0].ToString();
+            lblIR4PosX.Text = IRPositions[3,0].ToString();
+
+            lblIR1PosY.Text = IRPositions[0,1].ToString();
+            lblIR2PosY.Text = IRPositions[1,1].ToString();
+            lblIR3PosY.Text = IRPositions[2,1].ToString();
+            lblIR4PosY.Text = IRPositions[3,1].ToString();
 
             if((report.Data[1] & 0x9F) == 0x4)
             {
@@ -286,35 +295,32 @@ namespace Testtool
 
         private void drawAcceleroRectangles(float[] acceleroData)
         {
-            if (firstGraphicDrawn) destroyGraphics(); //destroy all previously drawn rectangles
-
-            Color[] randomColor = new System.Drawing.Color[2] {Color.Red, Color.Green};
-            int random;
-            Random rnd = new Random();
-            random = rnd.Next(0,2);
-
-
-            redBrush = new System.Drawing.SolidBrush(randomColor[random]);
             acceleroGraphics = grpControllerRear.CreateGraphics();
-
+            acceleroGraphics.Clear(grpControllerRear.BackColor);
             
-            if (acceleroData[0] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(5, 440, (int)(acceleroData[0] * 150), 50));//X-
-            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(150, 440, (int)(acceleroData[0] * 150), 50));//X+
+            redBrush = new System.Drawing.SolidBrush(Color.Red);
 
-            if (acceleroData[1] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 490, 50, (int)(acceleroData[2] * 150)));//Y-
-            else  acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 290, 50, (int)(acceleroData[1] * 150)));//Y+          
+            float accelX, accelY, accelZ;
+            if (acceleroData[0] >= .5) accelX = (acceleroData[0] - (float).5)*2;
+            else accelX = (acceleroData[0] - (float).5)*2;
+            if (acceleroData[1] >= .5) accelY = (acceleroData[1] - (float).5)*2;
+            else accelY = (acceleroData[1] - (float).5)*2;
+            if (acceleroData[2] >= .5) accelZ = (acceleroData[2] - (float).5)*2;
+            else accelZ = (acceleroData[2] - (float).5)*2;
 
-            if (acceleroData[2] < .5) acceleroGraphics.FillRectangle(redBrush, new Rectangle(75, 650, (int)(acceleroData[2]*150), 50));//Z-
-            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(75, 720, (int)(acceleroData[2] * 150), 50));//Z+*/
 
-            firstGraphicDrawn = true;
-        }
+            if (accelX < 0) acceleroGraphics.FillRectangle(redBrush, new Rectangle(155 - Convert.ToInt16(-(accelX * 150)), 440, Convert.ToInt16(-(accelX * 150)), 50));//X-
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(155, 440, (Convert.ToInt16(accelX * 150)), 50));//X+
 
-        private void destroyGraphics()
-        {
-            redBrush.Dispose();
-            acceleroGraphics.Dispose();
-         
+            if (accelZ < 0) acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 440 - Convert.ToInt16(-(accelZ * 150)), 50, Convert.ToInt16(-(accelZ * 150))));//Z-
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(125, 490, 50, Convert.ToInt16(accelZ * 150)));//Z+          
+
+            if (accelY < 0) acceleroGraphics.FillRectangle(redBrush, new Rectangle(155 - Convert.ToInt16(-(accelY * 150)), 650, Convert.ToInt16(-(accelY * 150)), 50));//Y-
+            else acceleroGraphics.FillRectangle(redBrush, new Rectangle(155, 650, Convert.ToInt16(accelY * 150), 50));//Y+
+
+            lblAccelerationX.Text = accelX.ToString();
+            lblAccelerationY.Text = accelY.ToString();
+            lblAccelerationZ.Text = accelZ.ToString();
         }
 
         private void enableIRCamera()
@@ -370,8 +376,6 @@ namespace Testtool
             int y2 = report.Data[9] | (report.Data[7] & 3 << 2) << 6;
             int y3 = report.Data[11] | (report.Data[12] & 3 << 6) << 2;
             int y4 = report.Data[14] | (report.Data[12] & 3 << 2) << 6;
-
-            Console.Write("X1: " + x1 + " || Y1: " + y1 + "\n");
 
             return new int[4,2] {{x1,y1}, {x2,y2},{x3,y3},{x4,y4}};
         }
