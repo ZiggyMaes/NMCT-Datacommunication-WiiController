@@ -16,6 +16,8 @@ namespace PresentationTool
         HIDDevice _device;
         private System.Drawing.Graphics graphics;
 
+        bool blnbuttonReleased = true;
+
         public frmPresentationTool()
         {
             InitializeComponent();
@@ -91,14 +93,17 @@ namespace PresentationTool
 
         private void processButtonData(HIDReport report)
         {
-            if((report.Data[0] & 0x1F) == 0x1) //Left
+            if (((report.Data[0] & 0x1) == 0x1) && blnbuttonReleased == true) //Left
             {
-                //Slide terug
+                blnbuttonReleased = false;
+                SendKeys.Send("{LEFT}");         
             }
-            else if ((report.Data[0] & 0x1F) == 0x2) //Right
+            else if (((report.Data[0] & 0x2) == 0x2) && blnbuttonReleased == true) //Right
             {
-                //Slide verder
+                blnbuttonReleased = false;
+                SendKeys.Send("{RIGHT}");
             }
+            else if ((report.Data[0] & 0x2) == 0) blnbuttonReleased = true;
 
         }
 
